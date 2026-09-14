@@ -4,9 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+
+- Used the reconnect identifier when an enabled persistent-chat customer closes a reconnected conversation.
+
 ### Changed
 
 - Corrected the version `2.0.0` feature documentation.
+- Removed redundant "Live Chat version 2" wording from the 2.0 migration guide and related API notes.
+
+### Added
+
+- **Internal use only, not consumer API.** `getChatConfig` can now adopt a live chat config the caller already fetched, instead of issuing a duplicate request. The parameters are deliberately absent from the exported `GetLiveChatConfigOptionalParams` type and are unsupported for external callers — they exist for first-party loaders and may change or be withdrawn without notice. The payload is treated as untrusted: it is adopted only when the caller's attestation, the payload's own identity, and its shape all match the SDK instance, and any rejection or failure while applying it falls back to the normal network fetch. Sound only while the config stays inside the realm that fetched it.
 
 ## [2.0.0] - 2026-08-13
 
